@@ -8,20 +8,32 @@ import { useState } from 'react'
 function App() {
 
   const [emotion, setEmotion] = useState('')
-  const [meme, setMeme] = useState({image: null, alt: null})
+  const [meme, setMeme] = useState({image: '', alt: ''})
+  const [gifs, setGifs] = useState(false)
   // display all unqiue emotions. map to get all array of emtions, flatten then new Set to remove duplicates
   const unqiueEmotions = [...new Set(catsData.map(cat => cat.emotionTags).flat())]
-  console.log(unqiueEmotions)
+  //console.log(unqiueEmotions)
 
   function handleClick(e: React.MouseEvent<HTMLInputElement>) {
-    console.log(e.currentTarget.value)
+    //console.log(e.currentTarget.value)
     setEmotion(e.currentTarget.value)
   }
 
+  function handleCheckbox(e) {
+    //console.log(e.currentTarget.checked)
+    setGifs(e.currentTarget.checked)
+  }
+
+  console.log(gifs)
+
   function showMeme() {
     if(!emotion) return
+    // GIFs only option
     // filter to get all memes containing selected emotion
-    const filterMemes = catsData.filter(meme => meme.emotionTags.includes(emotion))
+    const filterMemes = gifs 
+      ? catsData.filter(meme => meme.emotionTags.includes(emotion) && meme.isGif) 
+      : catsData.filter(meme => meme.emotionTags.includes(emotion))
+    //console.log(filterMemes)
     // choose one randomly
     const ranNum = Math.floor(Math.random() * filterMemes.length)
     setMeme(filterMemes[ranNum])
@@ -45,7 +57,11 @@ function App() {
           
         <div className="gifs-check">
           <label htmlFor="gifs-only-option" className="gifs-check-label">Animated GIFs only</label>
-          <input type="checkbox" id="gifs-only-option" />
+          <input 
+            type="checkbox" 
+            id="gifs-only-option" 
+            onChange={handleCheckbox}
+          />
         </div>
         <button
           type="button" 
