@@ -19,12 +19,10 @@ function App() {
     setEmotion(e.currentTarget.value)
   }
 
-  function handleCheckbox(e) {
+  function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
     //console.log(e.currentTarget.checked)
     setGifs(e.currentTarget.checked)
   }
-
-  console.log(gifs)
 
   function showMeme() {
     if(!emotion) return
@@ -36,9 +34,12 @@ function App() {
     //console.log(filterMemes)
     // choose one randomly
     const ranNum = Math.floor(Math.random() * filterMemes.length)
-    setMeme(filterMemes[ranNum])
-  }
 
+
+    setMeme(filterMemes[ranNum])
+    
+  }
+  console.log(meme, "meme")
   return (
     <>
    <Header />
@@ -49,6 +50,7 @@ function App() {
         <div className="emotion-radios" id="emotion-radios">
           {unqiueEmotions && unqiueEmotions.map(catEmotion => 
             <RadioButton 
+              key={catEmotion}
               catEmotion={catEmotion} 
               handleClick={handleClick} 
               emotion={emotion} />
@@ -65,13 +67,13 @@ function App() {
         </div>
         <button
           type="button" 
-          className="get-image-btn" 
+          className={`get-image-btn ${emotion ? "click" : "no-click"}`} 
           id="get-image-btn"
           onClick={showMeme}
           >Get Image</button>
       </div>
     </main>
-    <Modal image={meme.image} alt={meme.alt} />
+    <Modal image={meme.image} alt={meme.alt} reset={setMeme} />
     </>
   )
 }

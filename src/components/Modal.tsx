@@ -1,12 +1,22 @@
 
 import { useState, useEffect } from "react"
 
-function Modal({image, alt}:{image: string, alt: string}) {
+type DisplayModal = {
+    image: string, 
+    alt: string,
+    reset: React.Dispatch<React.SetStateAction<{
+        image: string;
+        alt: string;
+    }>>
+}
+
+function Modal({image, alt, reset}:DisplayModal) {
     
     const [open, setOpen] = useState(false)
 
     function closeModal() {
         setOpen(false)
+        reset({image: '', alt: ''})
     }
 
     useEffect(() => {

@@ -119,6 +119,14 @@ input[type="radio"]{
     margin-bottom: 8px;
 }
 
+.get-image-btn.click {
+    cursor: pointer;
+}
+
+.get-image-btn.no-click {
+    cursor: not-allowed;
+}
+
 /* modal */
 
 .meme-modal{

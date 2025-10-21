@@ -1,9 +1,12 @@
 
-import { useState } from "react"
+type InputRadio = {
+    catEmotion: string, 
+    emotion: string, 
+    handleClick: (e:React.MouseEvent<HTMLInputElement>) => void
+}
 
-function RadioButton({catEmotion, emotion, handleClick}:{catEmotion: string, emotion: string, handleClick: (e:React.MouseEvent<HTMLInputElement>) => void}) {
+function RadioButton({catEmotion, emotion, handleClick}:InputRadio) {
     
-    const [select, setSelect] = useState(false)
     const styles = catEmotion === emotion ? 'radio highlight' : 'radio'
 
     return (
