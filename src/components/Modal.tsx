@@ -39,7 +39,7 @@ function Modal({image, alt, reset}:DisplayModal) {
 			<div id="meme-modal-inner">
                 <img 
                     className="cat-img" 
-                    src={`/images/${image}`}
+                    src={`images/${image}`}
                     alt={alt}
                 />
             </div>
