@@ -39,7 +39,7 @@ function App() {
     setMeme(filterMemes[ranNum])
     
   }
-  console.log(meme, "meme")
+  //console.log(meme, "meme")
   return (
     <>
    <Header />
